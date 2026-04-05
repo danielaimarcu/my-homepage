@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daniel Marcu</title>
+  <style>
+    /* ── Reset & base ── */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      background-color: #f7f5f2;
+      color: #2c2c2c;
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+
+    /* ── Layout container ── */
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* ── Header: name & tagline ── */
+    header {
+      border-bottom: 2px solid #2c2c2c;
+      padding-bottom: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    header h1 {
+      font-size: 2.8rem;
+      letter-spacing: -0.5px;
+    }
+
+    header p.tagline {
+      font-size: 1rem;
+      color: #666;
+      margin-top: 0.25rem;
+      font-style: italic;
+    }
+
+    /* ── Sections: bio & hobbies ── */
+    section {
+      margin-bottom: 2.5rem;
+    }
+
+    section h2 {
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 0.75rem;
+      color: #555;
+    }
+
+    section p {
+      font-size: 1.05rem;
+    }
+
+    /* ── Hobbies list ── */
+    ul.hobbies {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    ul.hobbies li {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 1.05rem;
+    }
+
+    ul.hobbies li::before {
+      content: "—";
+      color: #999;
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid #ccc;
+      padding-top: 1rem;
+      font-size: 0.85rem;
+      color: #999;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- HEADER: displays your name prominently and a one-line tagline -->
+    <header>
+      <h1>Daniel AI Marcu</h1>
+      <p class="tagline">Builder of things. Curious by nature.</p>
+    </header>
+
+    <!-- BIO SECTION: a short paragraph introducing who you are -->
+    <section>
+      <h2>About</h2>
+      <p>
+        I'm a software engineer who enjoys crafting clean, thoughtful products.
+        I care about the details — in code, in design, and in how things feel
+        when you use them. This is my small corner of the web.
+      </p>
+    </section>
+
+    <!-- HOBBIES SECTION: a list of three personal interests -->
+    <section>
+      <h2>Interests</h2>
+      <ul class="hobbies">
+        <li>Reading — everything from scientific papers to literature</li>
+        <li>Hiking — everything from short-one-day hikes to long treks</li>
+        <li>Listening to music — everything from rock'n'roll to classical music</li>
+      </ul>
+    </section>
+
+    <!-- FOOTER: a small attribution line at the bottom of the page -->
+    <footer>
+      <p>&copy; 2026 Daniel AI Marcu</p>
+    </footer>
+
+  </div>
+</body>
+</html>
