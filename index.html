@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Daniel Marcu</title>
+  <title>Daniel AI Marcu</title>
   <style>
     /* ── Reset & base ── */
     *, *::before, *::after {
@@ -18,6 +18,40 @@
       color: #2c2c2c;
       line-height: 1.7;
       padding: 2rem 1rem;
+      /* Smooth color transition when switching modes */
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* ── Dark mode: applied to <body> by JavaScript ── */
+    body.dark {
+      background-color: #1a1a1a;
+      color: #e0ddd8;
+    }
+
+    body.dark header {
+      border-bottom-color: #e0ddd8;
+    }
+
+    body.dark header p.tagline {
+      color: #999;
+    }
+
+    body.dark section h2 {
+      color: #aaa;
+    }
+
+    body.dark ul.hobbies li::before {
+      color: #666;
+    }
+
+    body.dark footer {
+      border-top-color: #444;
+      color: #666;
+    }
+
+    body.dark #toggle-btn {
+      background-color: #e0ddd8;
+      color: #1a1a1a;
     }
 
     /* ── Layout container ── */
@@ -31,6 +65,11 @@
       border-bottom: 2px solid #2c2c2c;
       padding-bottom: 1.5rem;
       margin-bottom: 2rem;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      transition: border-bottom-color 0.3s ease;
     }
 
     header h1 {
@@ -43,6 +82,25 @@
       color: #666;
       margin-top: 0.25rem;
       font-style: italic;
+      transition: color 0.3s ease;
+    }
+
+    /* ── Dark mode toggle button ── */
+    #toggle-btn {
+      flex-shrink: 0;
+      margin-top: 0.4rem;
+      padding: 0.35rem 0.75rem;
+      font-family: inherit;
+      font-size: 0.85rem;
+      background-color: #2c2c2c;
+      color: #f7f5f2;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    #toggle-btn:hover {
+      opacity: 0.75;
     }
 
     /* ── Sections: bio & hobbies ── */
@@ -56,6 +114,7 @@
       letter-spacing: 2px;
       margin-bottom: 0.75rem;
       color: #555;
+      transition: color 0.3s ease;
     }
 
     section p {
@@ -80,6 +139,7 @@
     ul.hobbies li::before {
       content: "—";
       color: #999;
+      transition: color 0.3s ease;
     }
 
     /* ── Footer ── */
@@ -88,16 +148,20 @@
       padding-top: 1rem;
       font-size: 0.85rem;
       color: #999;
+      transition: border-top-color 0.3s ease, color 0.3s ease;
     }
   </style>
 </head>
 <body>
   <div class="container">
 
-    <!-- HEADER: displays your name prominently and a one-line tagline -->
+    <!-- HEADER: displays your name, tagline, and the dark mode toggle button -->
     <header>
-      <h1>Daniel AI Marcu</h1>
-      <p class="tagline">Builder of things. Curious by nature.</p>
+      <div>
+        <h1>Daniel AI Marcu</h1>
+        <p class="tagline">Builder of things. Curious by nature.</p>
+      </div>
+      <button id="toggle-btn">Dark mode</button>
     </header>
 
     <!-- BIO SECTION: a short paragraph introducing who you are -->
@@ -126,5 +190,47 @@
     </footer>
 
   </div>
+
+  <script>
+    // Grab references to the button, <body>, and tagline element once, up front.
+    // This is faster than searching the DOM every time the button is clicked.
+    const btn = document.getElementById('toggle-btn');
+    const body = document.body;
+    const tagline = document.querySelector('.tagline');
+
+    // Helper: updates both the button label and the tagline text to match the
+    // current mode. Centralising this avoids repeating the same lines below.
+    function updateText(isDark) {
+      btn.textContent = isDark ? 'Light mode' : 'Dark mode';
+      // Show a different tagline depending on which mode is active.
+      tagline.textContent = isDark ? 'Builder of things.' : 'Curious by nature.';
+    }
+
+    // Listen for a click on the button. Every click runs the function below.
+    btn.addEventListener('click', function () {
+
+      // toggle() adds the class if it's absent, removes it if it's present.
+      // The CSS rule "body.dark { ... }" does all the visual work —
+      // JavaScript only needs to flip this single class on or off.
+      body.classList.toggle('dark');
+
+      // Check the result of the toggle to know which mode we're now in.
+      const isDark = body.classList.contains('dark');
+
+      // Update labels and persist the preference in localStorage so it
+      // survives page reloads. localStorage.setItem stores a string key/value pair.
+      updateText(isDark);
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+
+    // On page load, check if the user previously chose a theme.
+    // localStorage.getItem returns the stored string, or null if nothing was saved.
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      // Re-apply dark mode and sync all text without triggering a click event.
+      body.classList.add('dark');
+      updateText(true);
+    }
+  </script>
 </body>
 </html>
